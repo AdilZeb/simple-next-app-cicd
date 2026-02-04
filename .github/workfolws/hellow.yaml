@@ -1,18 +1,31 @@
-name: samplefile
+name: next-app
 
 on:
   push:
-    branches:
-      - main
+     branches:
+        - main 
   pull_request:
-    branches:
-      - main
+      branches:
+        - main
   workflow_dispatch:
+  environment:
+    code: production
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-      - name: Say Hello
-        run: echo "Hello, World!"
+      - uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - name: |
+         echo "access the environment ${{environment.code}}"
+       
+      - name: Install dependencies
+        run: npm install
+
+
+      - name: Build project
+        run: npm run build
