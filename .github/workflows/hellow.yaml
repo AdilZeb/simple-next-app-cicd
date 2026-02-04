@@ -2,32 +2,32 @@ name: next-app
 
 on:
   push:
-     branches:
-        - main 
+    branches:
+      - main
   pull_request:
-      branches:
-        - main
+    branches:
+      - main
   workflow_dispatch:
-  
+
 jobs:
   build:
     runs-on: ubuntu-latest
-    env: 
+    env:
       cloud: google-cloud
+
     steps:
       - uses: actions/checkout@v3
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '22'
+
       - name: Access Environment
-        run:
-         echo "access the environment $cloud"
-       
+        run: echo "access the environment $cloud"
+
       - name: Install dependencies
         run: npm install
-
 
       - name: Build project
         run: npm run build
