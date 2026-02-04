@@ -12,7 +12,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-  
+    env: 
+      cloud: google-cloud
     steps:
       - uses: actions/checkout@v3
 
@@ -20,8 +21,9 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18'
-      - name: |
-         echo "access the environment ${{environment.code}}"
+      - name: Access Environment
+        run:
+         echo "access the environment $cloud"
        
       - name: Install dependencies
         run: npm install
